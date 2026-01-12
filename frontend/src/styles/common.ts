@@ -85,3 +85,45 @@ export const Button = styled.button<{ variant?: 'primary' | 'danger' | 'ghost' }
     }
   }}
 `;
+
+export const IconButton = styled.button`
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+export const EmptyState = styled.div`
+  padding: 48px 0;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+`;
+
+export const QuizLink = styled.a`
+  font-size: 15px;
+  font-weight: 500;
+  color: #1f2937;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const Count = styled.span`
+  color: #6b7280;
+  font-size: 13px;
+  margin-left: 6px;
+`;
+
+export const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
