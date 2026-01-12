@@ -11,6 +11,11 @@ export type QuizOption = {
 	isCorrect: boolean
 }
 
+export type QuestionType =
+  | 'TRUE_FALSE'
+  | 'SHORT_ANSWER'
+  | 'MULTIPLE_CHOICE'
+
 export type QuizQuestion = {
 	id: string
 	type: 'MULTIPLE_CHOICE' | 'TRUE_FALSE' | 'SHORT_ANSWER'

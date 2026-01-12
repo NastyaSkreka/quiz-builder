@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Page = styled.div`
   max-width: 820px;
@@ -37,19 +37,32 @@ export const Column = styled.div`
   gap: 12px;
 `;
 
-export const Input = styled.input`
-  width: 100%;
+export const Input = styled.input<{ hasError?: boolean }>`
+  width: 90%;
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #cfd4dc;
   font-size: 14px;
 
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      border-color: #e74c3c;
+      background: #fff6f6;
+    `}
+
   &:focus {
     outline: none;
-    border-color: #5b8cff;
+    border-color: ${({ hasError }) =>
+      hasError ? '#e74c3c' : '#5b8cff'};
   }
 `;
 
+export const ErrorText = styled.div`
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 4px;
+`;
 export const Select = styled.select`
   width: 100%;
   padding: 10px 12px;
@@ -127,3 +140,4 @@ export const List = styled.div`
   flex-direction: column;
   gap: 12px;
 `;
+

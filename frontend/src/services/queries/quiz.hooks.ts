@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient, type UseMutationOptions } from '@tanstack/react-query'
 import { quizService } from '../api/quizzes.service'
-import type { CreateQuizPayload } from '../api/quizzes.types'
+import type { CreateQuizPayload, Quiz } from '../api/quizzes.types'
 import { quizKeys } from './quiz.keys'
 
 export function useQuizzes() {
@@ -18,20 +18,35 @@ export function useQuiz(id?: string) {
 	})
 }
 
-export function useCreateQuiz() {
+export function useCreateQuiz(
+	options?: UseMutationOptions<
+		Quiz,
+		unknown,
+		CreateQuizPayload
+	>
+) {
 	const queryClient = useQueryClient()
 
-	return useMutation({
-		mutationFn: (payload: CreateQuizPayload) => quizService.create(payload),
+	return useMutation<
+		Quiz,
+		unknown,
+		CreateQuizPayload
+	>({
+		mutationFn: (payload) => quizService.create(payload),
 
-		onSuccess: () => {
+		onSuccess: (...args) => {
 			queryClient.invalidateQueries({
 				queryKey: quizKeys.list(),
 			})
+
+			options?.onSuccess?.(...args)
+		},
+
+		onError: (...args) => {
+			options?.onError?.(...args)
 		},
 	})
 }
-
 export function useDeleteQuiz() {
 	const queryClient = useQueryClient()
 
